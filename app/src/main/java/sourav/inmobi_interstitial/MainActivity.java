@@ -11,6 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.google.ads.mediation.inmobi.InMobiAdapter;
+import com.google.ads.mediation.inmobi.InMobiNetworkKeys;
+import com.google.ads.mediation.inmobi.InMobiNetworkValues;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -19,6 +22,7 @@ import com.inmobi.ads.InMobiAdRequestStatus;
 import com.inmobi.ads.InMobiInterstitial;
 
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.signin.SignIn;
 
 import java.util.Map;
 
@@ -31,9 +35,14 @@ public class MainActivity extends AppCompatActivity {
     Button LoadAdmob;
 
 
+
     InMobiInterstitial interstitialAd;
 
+
     private InterstitialAd admobinterstitialad;
+
+    Bundle extras = new Bundle();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +52,20 @@ public class MainActivity extends AppCompatActivity {
 
         show=(Button) findViewById(R.id.show);
         LoadAdmob=(Button) findViewById(R.id.ADMOBLOAD);
+        InMobiSdk.setLogLevel(InMobiSdk.LogLevel.DEBUG);
+SignIn.API.getName();
+        /*extras.putString(InMobiNetworkKeys.AGE,"22");
+        extras.putString(InMobiNetworkKeys.AREA_CODE, "799002");
+        extras.putString(InMobiNetworkKeys.LOGLEVEL,InMobiNetworkKeys.LOGLEVEL);*/
 
 
         /**** admob part***/
-       MobileAds.initialize(this, "ca-app-pub-7599894810320338~7728407866");
+      // MobileAds.initialize(this, "ca-app-pub-7599894810320338~6155871743");    //naya
+        MobileAds.initialize(this, "ca-app-pub-7599894810320338~7728407866");
         admobinterstitialad= new InterstitialAd(this);
-        admobinterstitialad.setAdUnitId("ca-app-pub-7599894810320338/3789146948"); //my::  ca-app-pub-7599894810320338/3789146948  // inmobi :: ca-app-pub-7124338768015628/9148926799
 
+       admobinterstitialad.setAdUnitId("ca-app-pub-7599894810320338/3789146948"); //my::  ca-app-pub-7599894810320338/3789146948  // inmobi :: ca-app-pub-7124338768015628/9148926799
+      // admobinterstitialad.setAdUnitId("ca-app-pub-7599894810320338/8207320012");  //naya
         admobinterstitialad.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
